@@ -1,0 +1,14 @@
+from django.conf.urls import patterns, include, url
+from django.contrib import admin
+from ForsquareSampleApp.views import access_page, parse_code, all_check_ins
+
+urlpatterns = patterns('',
+    # Examples:
+    # url(r'^$', 'ForsquareSample.views.home', name='home'),
+    # url(r'^blog/', include('blog.urls')),
+
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^get-started/', access_page),
+    url(r'^$', parse_code),
+    url(r'^all-check-ins/$', all_check_ins)
+)
