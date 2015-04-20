@@ -81,13 +81,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-Temp_Path = os.path.realpath('.')
-
 STATIC_ROOT = ''
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
 
+Temp_Path = os.path.realpath('.')
 TEMPLATE_DIRS = (
     Temp_Path +"/templates",
 )
