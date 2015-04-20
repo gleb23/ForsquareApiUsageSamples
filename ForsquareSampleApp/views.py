@@ -8,6 +8,8 @@ import json
 import logging
 
 # Get an instance of a logger
+from ForsquareSampleApp.response_parser import parse_checkins
+
 logger = logging.getLogger(__name__)
 
 p = Properties()
@@ -40,5 +42,5 @@ def parse_code(request):
 def all_check_ins(request):
     response = urllib2.urlopen(string.Template('https://api.foursquare.com/v2/checkins/recent?oauth_token=$ACCESS_TOKEN&v=$DATE')
                 .substitute({'ACCESS_TOKEN': access_token,
-                             'DATE': '20150419'})).read()
-    return HttpResponse(json.dumps(json.loads(response), indent=4, sort_keys=True))
+                             'DATE': '20150420'})).read()
+    return HttpResponse(json.dumps(parse_checkins(json.loads(response)), indent=4, sort_keys=True))
