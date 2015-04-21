@@ -1,5 +1,4 @@
 import string
-from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from pyjavaproperties import Properties
 import urllib2
@@ -39,8 +38,16 @@ def parse_code(request):
 
     return render_to_response("examples-page.html", {})
 
+
 def all_check_ins(request):
     response = urllib2.urlopen(string.Template('https://api.foursquare.com/v2/checkins/recent?oauth_token=$ACCESS_TOKEN&v=$DATE')
                 .substitute({'ACCESS_TOKEN': access_token,
-                             'DATE': '20150420'})).read()
-    return HttpResponse(json.dumps(parse_checkins(json.loads(response)), indent=4, sort_keys=True))
+                             'DATE': '20150421'})).read()
+    return render_to_response('check-ins.html', {'checkins': parse_checkins(json.loads(response))})
+
+
+def all_places(request):
+    response = urllib2.urlopen(string.Template('https://api.foursquare.com/v2/checkins/recent?oauth_token=$ACCESS_TOKEN&v=$DATE')
+                .substitute({'ACCESS_TOKEN': access_token,
+                             'DATE': '20150421'})).read()
+    return render_to_response('check-ins.html', {'places': parse_checkins(json.loads(response))})

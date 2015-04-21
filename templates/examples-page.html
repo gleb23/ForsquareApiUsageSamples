@@ -2,9 +2,43 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "semantic-ui/dist/semantic.css" %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="{% static "semantic-ui/dist/semantic.js" %}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.ui.button')
+                    .api({
+                        url: '/all-check-ins'
+                    })
+            ;
+            getLocation();
+        });
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+        function showPosition(position) {
+            alert(position)
+        }
+
+    </script>
+    <title>APIs</title>
 </head>
 <body>
+    <div class="ui centered huge vertical buttons">
+      <div class="ui button">Click here to see all check-ins</div>
+      <div class="ui button">Click here to see places nearby</div>
+      <div class="ui button">Events</div>
+      <div class="ui button">Photos</div>
+    </div>
     <a href="/all-check-ins">Click here to see all check-ins</a>
+    <a href="/all-places">Click here to see places nearby</a>
+<div class="column"><i class="copyright icon"></i>Hlib Babii 2015</div>
 </body>
 </html>

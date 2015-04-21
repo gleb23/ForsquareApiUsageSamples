@@ -1,12 +1,12 @@
 def parse_checkin(checkin):
-    parsed_checkin = {}
     try:
-        parsed_checkin['shout'] = checkin['shout']
-        parsed_checkin['first_name'] = checkin['user']['firstName']
-        parsed_checkin['last_name'] = checkin['user']['lastName']
+        return {
+            'shout': checkin['shout'],
+            'first_name': checkin['user']['firstName'],
+            'last_name': checkin['user']['lastName']
+        }
     except:
-        pass
-    return parsed_checkin
+        return {}
 
 
 def parse_checkins(raw_json):

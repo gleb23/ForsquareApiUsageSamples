@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
-from ForsquareSampleApp.views import access_page, parse_code, all_check_ins
+from ForsquareSampleApp.views import access_page, parse_code, all_check_ins, all_places
 
 urlpatterns = patterns('',
     # Examples:
@@ -12,5 +12,6 @@ urlpatterns = patterns('',
     url(r'^get-started/', access_page),
     url(r'^$', parse_code),
     url(r'^all-check-ins/$', all_check_ins),
-    url(r'^st$', TemplateView.as_view(template_name='static.html'))
+    url(r'^all-places/$', all_places),
+    url(r'^st$', TemplateView.as_view(template_name='check-ins.html'))
 )
