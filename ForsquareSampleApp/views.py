@@ -21,7 +21,7 @@ access_token = None
 
 def access_page(request):
     return render_to_response("access_page.html", {'redirect_uri': redirect_uri,
-                                                   'client_id' : client_id})
+                                                   'client_id': client_id})
 
 
 def parse_code(request):
@@ -51,15 +51,17 @@ def coordinates_to_comma_separated_string(coordinates):
 
 
 def all_places(request):
-    coordinates = request.GET['coordinates']
-    response = urllib2.urlopen(string.Template('https://api.foursquare.com/v2/venues/search?ll=$COMMA_SEPARATED_COORDINATES&oauth_token=BLELVGEJOZ5P0HPVMH24RJ4CP1GRZ1I5DTMYAVQLYR0EYBEU&v=$DATE')
-                .substitute({'COMMA_SEPARATED_COORDINATES': coordinates,
+    #coordinates = request.GET['coordinates']
+    #response = urllib2.urlopen(string.Template('https://api.foursquare.com/v2/venues/search?ll=$COMMA_SEPARATED_COORDINATES&oauth_token=BLELVGEJOZ5P0HPVMH24RJ4CP1GRZ1I5DTMYAVQLYR0EYBEU&v=$DATE')
+    response = urllib2.urlopen(string.Template('https://api.foursquare.com/v2/venues/search?near=Kyiv&oauth_token=BLELVGEJOZ5P0HPVMH24RJ4CP1GRZ1I5DTMYAVQLYR0EYBEU&v=$DATE')
+                .substitute({
+                            #'COMMA_SEPARATED_COORDINATES': coordinates,
                             'ACCESS_TOKEN': access_token,
-                             'DATE': '20150421'})).read()
-    return render_to_response('check-ins.html', {'places': parse_places(json.loads(response))})
+                             'DATE': '20150604'})).read()
+    return render_to_response('places.html', {'places': parse_places(json.loads(response))})
 
-def notifications(request):
-    response = urllib2.urlopen(string.Template('https://api.foursquare.com/v2/checkins/recent?oauth_token=$ACCESS_TOKEN&v=$DATE')
-                .substitute({'ACCESS_TOKEN': access_token,
-                             'DATE': '20150421'})).read()
-    return render_to_response('check-ins.html', {'places': parse_checkins(json.loads(response))})
+# def notifications(request):
+#     response = urllib2.urlopen(string.Template('https://api.foursquare.com/v2/checkins/recent?oauth_token=$ACCESS_TOKEN&v=$DATE')
+#                 .substitute({'ACCESS_TOKEN': access_token,
+#                              'DATE': '20150421'})).read()
+#     return render_to_response('check-ins.html', {'places': parse_checkins(json.loads(response))})

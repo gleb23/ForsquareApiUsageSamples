@@ -2,10 +2,48 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "semantic-ui/dist/semantic.css" %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="{% static "semantic-ui/dist/semantic.js" %}"></script>
+    <script>
+        $(document).ready(function() {
+        });
+
+        function formAndOpenPlacesNearbyRequest() {
+            location = getLocation();
+            locationString = 1;
+            window.open('/all-places?location='+locationString, '_blank')
+        }
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+        function showPosition(position) {
+            alert(position)
+        }
+
+    </script>
+    <title>APIs</title>
 </head>
 <body>
-<a href="https://foursquare.com/oauth2/authenticate?client_id={{client_id}}&response_type=code&redirect_uri={{ redirect_uri }}">
-    Click here!</a>
+
+        <div class="ui grid">
+        <div class="row">
+            <div class="column padding-reset">
+                <div class="ui huge message page grid">
+                    <i class="foursquare huge icon"></i>
+                    <h1 class="ui huge header">Forsquare API!</h1>
+                    <p>This is a simple site for demonstration of the core features of the Foursquare API</p>
+                    <a class="ui blue button"
+                       href="https://foursquare.com/oauth2/authenticate?client_id={{client_id}}&response_type=code&redirect_uri={{ redirect_uri }}">Get access &raquo;</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

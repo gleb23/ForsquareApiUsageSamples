@@ -18,9 +18,9 @@
 
         function getLocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
+                return navigator.geolocation.getCurrentPosition(showPosition);
             } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
+                alert("Geolocation is not supported by this browser.");
             }
         }
         function showPosition(position) {
@@ -39,8 +39,6 @@
                     <i class="foursquare huge icon"></i>
                     <h1 class="ui huge header">Forsquare API!</h1>
                     <p>This is a simple site for demonstration of the core features of the Foursquare API</p>
-                    <a class="ui blue button"
-                       onclick="window.open('https://foursquare.com/oauth2/authenticate?client_id={{client_id}}&response_type=code&redirect_uri={{ redirect_uri }}', '_blank')">Get access &raquo;</a>
                 </div>
             </div>
         </div>
@@ -59,15 +57,7 @@
                 <button class="ui tiny button m-top-10" id="places" onclick="formAndOpenPlacesNearbyRequest()">
                     Try it out &raquo;</button>
             </div>
-            <div class="column">
-                <h2 class="ui header">Push notifications</h2>
-                <p></p>
-                <button class="ui tiny button m-top-10" id="notifications" onclick="window.open('/notifications', '_blank')">
-                    Try it out &raquo;</button>
-            </div>
         </div>
     </div>
-
-<div class="column centered"><i class="copyright icon"></i>Hlib Babii 2015</div>
 </body>
 </html>
